@@ -1,0 +1,124 @@
+#%RAML 0.8
+---
+title: Services de contrevenants
+baseUri: http://localhost:3000
+version: 1
+
+/api:
+    / :
+        get:
+            description: Affiche la page d'acceuil.
+            responses:
+                200:
+                    description: La page s'est affichée avec succès.
+                304:
+                    description: La page n'est pas modifiée.
+                500:
+                    description: Une erreur interne s'est produite.
+    /doc :
+        get:
+            description: Affiche la page RAML.
+            responses:
+                200:
+                    description: La page s'est affichée avec succès.
+                304:
+                    description: La page n'est pas modifiée.
+                500:
+                    description: Une erreur interne s'est produite.
+    /contrevenants:
+        get:
+            description: Fournir la liste des contrevenants entre les deux dates spécifiées.
+            queryParameters:
+                du:
+                    description: Les contrevenants ont commis l'infraction après cette date.
+                    type: string
+                    required: true
+                    pattern: ^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$
+                    example: "2016-05-08"
+                au:
+                    description: Les contrevenants ont commis l'infraction avant cette date.
+                    type: string
+                    required: true
+                    pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+                    example: "2016-05-15"
+            responses:
+                200:
+                    description: La liste de contrevenants a été correctement envoyée.
+                    body:
+                        application/json:
+                            schema: !include ../schemas/multiple-contrevenants-output.json
+                304:
+                    description: La liste de contrevenants n'a pas été modifiée.
+                    body:
+                        application/json:
+                            schema: !include ../schemas/multiple-contrevenants-output.json
+                500:
+                    description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+        /etablissement/{etablissement}:
+            get:
+                description: Fournir la liste d'infractions d'un contrevenant spécifié (etablissement = nom de l'établissement).
+                responses:
+                    200:
+                        description: La liste d'infraction a été correctement envoyée.
+                        body:
+                            application/json:
+                                schema: !include ../schemas/multiple-contrevenants-output.json
+                    304:
+                        description: La liste d'infraction n'a pas été modifiée.
+                        body:
+                            application/json:
+                                schema: !include ../schemas/multiple-contrevenants-output.json
+                    404:
+                        description: La ressource n'existe pas.
+                    500:
+                        description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+        /nombres-infractions/json:
+            get:
+                description: Fournir une liste de contrevenants avec le nombre d'infractions commis. Cette liste sera en ordre décroissant et en format json.
+                responses:
+                    200:
+                        description: La liste de contrevenants a été correctement envoyée.
+                        body:
+                            application/json:
+                                schema: !include ../schemas/multiple-contrevenants-count-output.json
+                    304:
+                        description: La liste de contrevenants a été correctement envoyée.
+                        body:
+                            application/json:
+                                schema: !include ../schemas/multiple-contrevenants-count-output.json
+                    500:
+                        description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+        /nombres-infractions/xml:
+            get:
+                description: Fournir une liste de contrevenants avec le nombre d'infractions commis. Cette liste sera en ordre décroissant et en format xml.
+                responses:
+                    200:
+                        description: La liste de contrevenants a été correctement envoyée.
+                    304:
+                        description: La liste de contrevenants a été correctement envoyée.
+                    500:
+                        description: Une erreur interne s'est produite. L'erreur a été signalée à l'équipe de développement.
+    /contrevenants-form/{id}:
+        get:
+            description: Affiche le formulaire avec les champs contenant les information de id. Ces champs peuvent être modifiés pour être enregistrés.
+            responses:
+                200:
+                    description: La page s'est affichée avec succès.
+                304:
+                    description: La page n'est pas modifiée.
+                404:
+                    description: La ressource n'existe pas.
+                500:
+                    description: Une erreur interne s'est produite.
+        put:
+            description: Modifie le contrevenant.
+            responses:
+                200:
+                    description: Le contrevenant a été modifié.
+                    body:
+                        application/json:
+                            schema: !include ../schemas/single-contrevenant-output.json
+                404:
+                    description: La ressource n'existe pas.
+                500:
+                    description: Une erreur interne s'est produite.

@@ -1,0 +1,50 @@
+{
+  "type": "array",
+  "required": true,
+  "items": {
+    "type": "object",
+    "required": true,
+    "properties": {
+	  "_id": {
+        "type": "string",
+        "required": true
+      },
+	  "proprietaire": {
+        "type": "string",
+        "required": true
+      },
+      "categorie": {
+        "type": "string",
+        "required": true
+      },
+      "etablissement": {
+        "type": "string",
+        "required": true
+      },
+	  "adresse": {
+        "type": "string",
+        "required": true
+      },
+	  "ville": {
+        "type": "string",
+        "required": true
+      },
+	  "description": {
+        "type": "string",
+        "required": true
+      },
+	  "date_infraction": {
+        "type": "string",
+        "required": true
+      },
+	  "date_jugement": {
+        "type": "string",
+        "required": true
+      },
+	  "montant": {
+        "type": "string",
+        "required": true
+      }
+    }
+  }
+}

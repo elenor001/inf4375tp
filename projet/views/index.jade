@@ -1,0 +1,44 @@
+extends layout
+
+block content
+	h1 Page d'acceuil
+		
+	h2 Formulaire de dates
+	h4 Entrez deux dates afin d'afficher un tableau de contrevenants ayant commis au moins une infraction entre ces deux dates
+	form
+		table
+			tbody
+				tr
+					td.label Première date :
+					td
+						input#form-firstdate(type="text", required='required', name="du")
+				tr
+					td.label Deuxième date :
+					td
+						input#form-seconddate(type="text", required='required', name="au")
+				tr
+					td
+						input(type="button", onclick='retrieveContrevenants()', value="Enregistrer")
+							
+	h2 Liste déroulante de restaurants
+	h4 Veuillez choisir un restaurant afin d'afficher ses différentes infractions dans le tableau
+	form
+		select#deroule(onchange='retrieveEtablissment()')
+			each etablissement in liste
+				option #{etablissement}
+		
+	h2 Tableau de contrevenants
+		table#tablecontrevenants(border)
+			thead
+				tr
+					th Id
+					th Propriétaire
+					th Catégorie
+					th Établissement
+					th Adresse
+					th Ville
+					th Description						
+					th Date d'infraction
+					th Date de jugement
+					th Montant
+			tbody

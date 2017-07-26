@@ -1,0 +1,18 @@
+{
+  "type": "array",
+  "required": true,
+  "items": {
+    "type": "object",
+    "required": true,
+    "properties": {
+      "count": {
+        "type": "number",
+        "required": true
+      },
+	  "etablissement": {
+        "type": "string",
+        "required": true
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title Page de modification
+
+	body
+	h1 Formulaire de modification
+	
+	h2 Veuillez changez les champs pour apporter la modification
+	each objet in etablissement
+		form(method="POST" action="/contrevenants-form/"+objet._id+"?_method=PUT")
+			table
+				tbody
+					tr
+						td.label Propriétaire :
+						td
+							input#form-proprietaire(type="text", name='proprietaire', value=objet.proprietaire)
+					tr
+						td.label Catégorie :
+						td
+							input#form-categorie(type="text", name='categorie', value=objet.categorie)
+					tr
+						td.label Établissement :
+						td
+							input#form-etablissement(type="text", name='etablissement', value=objet.etablissement)
+					tr
+						td.label Adresse :
+						td
+							input#form-adresse(type="text", name='adresse', value=objet.adresse)
+					tr
+						td.label Ville :
+						td
+							input#form-ville(type="text", name='ville', value=objet.ville)
+					tr
+						td.label Description :
+						td
+							input#form-description(type="text", name='description', value=objet.description)
+					tr
+						td.label Date d'infraction :
+						td
+							input#form-date-infraction(type="text", name='date_infraction', value=objet.date_infraction)
+					tr
+						td.label Date de jugement :
+						td
+							input#form-date-jugement(type="text", name='date_jugement', value=objet.date_jugement)
+					tr
+						td.label Montant :
+						td
+							input#form-montant(type="text", name='montant', value=objet.montant)
+					tr
+						td
+							input(type="submit", value="Enregistrer")
